@@ -1,0 +1,143 @@
+#:kivy 2.0
+
+ScreenManager:
+    Spk:
+    List:
+        id: list
+    Detail:
+        id: detail
+
+<Spk>:
+    name: 'spk'
+    
+    BoxLayout:
+        orientation: 'vertical'
+
+        MDToolbar:
+            title: 'Login'
+            md_bg_color: app.theme_cls.primary_color
+
+        ScreenManager:
+            id: screen_manager
+
+            Screen:
+                name: 'login_screen'
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(48)
+
+                    MDTextField:
+                        id: username
+                        hint_text: 'Username'
+                        helper_text: 'Enter your username'
+                        helper_text_mode: 'on_focus'
+                        icon_right: 'account'
+                        icon_right_color: app.theme_cls.primary_color
+                        pos_hint: {'center_x': 0.5}
+                        size_hint_x: None
+                        width: 300
+
+                    MDTextField:
+                        id: password
+                        hint_text: 'Password'
+                        helper_text: 'Enter your password'
+                        helper_text_mode: 'on_focus'
+                        password: True
+                        icon_right: 'key-variant'
+                        icon_right_color: app.theme_cls.primary_color
+                        pos_hint: {'center_x': 0.5}
+                        size_hint_x: None
+                        width: 300
+
+                    MDRaisedButton:
+                        text: 'Login'
+                        pos_hint: {'center_x': 0.5}
+                        on_release: app.login(username.text, password.text)
+
+<List>:
+    id: list
+    name: 'list'
+    
+    BoxLayout:
+        orientation:"vertical"     
+        size: root.width, root.height
+        padding: 30
+
+        MDTextField:
+            id: sr
+            hint_text: "Search..."
+            pos_hint: {'left_x': 0.5, 'left_y': 0.5}
+            size_hint_x: None
+            width: 300
+            on_text:app.search()
+            # on_press: app.cari()
+
+        ScrollView:
+            id: sv
+              
+            MDList:
+                id: ls
+                   
+                        
+<Detail>:
+    id: detail
+    name: 'detail'
+    
+    BoxLayout:
+        orientation:"vertical"
+        
+        BoxLayout:
+            orientation:"vertical"
+            id: blok1
+
+        BoxLayout:
+            orientation:"horizontal"   
+            padding:40            
+            Button:
+                id: dis
+                text:"Discard"
+                # size: 20, 30
+                # background_color: 0.1, 0.1, 0.6, 1
+                background_color: "red" 
+                pos_hint: {"x":0.35, "y": 0.3}
+                size_hint: 0.3, 0.2
+                
+                padding_x:[20,0]
+                padding_y:[0,20]
+                on_press: root.back()
+            
+            Button:
+                id: app
+                text:"Approve"
+                # size: 20, 30
+                background_color: 0.1, 0.5, 0.6, 1
+                pos_hint: {"x":0.35, "y": 0.3}
+                size_hint: 0.3, 0.2
+                padding_x:[20,0]
+                padding_y:[0,20]
+                on_press: root.approved() 
+                
+    
+    # BoxLayout:
+    #     orientation:"horizontal"
+    #         Button:
+    #             text:"Approve"
+    #             # size: 20, 30
+    #             background_color: 0.1, 0.5, 0.6, 1
+    #             pos_hint: {"x":0.35, "y": 0.3}
+    #             size_hint: 0.3, 0.2
+            
+    #             on_press: app.approve()
+
+    #         Button:
+    #             text:"Discard"
+    #             # size: 20, 30
+    #             background_color: 0.1, 0.5, 0.6, 1
+    #             pos_hint: {"x":0.35, "y": 0.3}
+    #             size_hint: 0.3, 0.2
+            
+    #             on_press: app.back()
+    
+
+    
